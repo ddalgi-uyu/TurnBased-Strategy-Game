@@ -2,26 +2,31 @@ using UnityEngine;
 
 public class MouseWorld : MonoBehaviour
 {
-    [SerializeField] private LayerMask mousePlaneLayerMask;
+    public static MouseWorld Instance;
 
-    public static MouseWorld instance;
+    [SerializeField] private LayerMask mousePlaneLayerMask;
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     private void Update()
     {
+        // Move mouse indicator to the mouse position
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out RaycastHit rayCastHit, float.MaxValue, mousePlaneLayerMask);
         transform.position = rayCastHit.point;
     }
 
+    /// <summary>
+    /// Get position of the mouse
+    /// </summary>
+    /// <returns></returns>
     public static Vector3 GetPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out RaycastHit rayCastHit, float.MaxValue, instance.mousePlaneLayerMask);
+        Physics.Raycast(ray, out RaycastHit rayCastHit, float.MaxValue, Instance.mousePlaneLayerMask);
 
         return rayCastHit.point;
     }

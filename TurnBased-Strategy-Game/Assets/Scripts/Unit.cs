@@ -15,6 +15,7 @@ public class Unit : MonoBehaviour
 
     private void Update()
     {
+        // Move unit to target position with animation
         if (Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
         {
             Vector3 moveDirection = (targetPosition - transform.position).normalized;
@@ -25,7 +26,7 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            unityAnimator.SetBool("isWalking", true);
+            unityAnimator.SetBool("isWalking", false);
         }
     }
 

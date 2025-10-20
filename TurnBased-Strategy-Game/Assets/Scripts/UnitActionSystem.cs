@@ -22,6 +22,7 @@ public class UnitActionSystem : MonoBehaviour
 
     private void Update()
     {
+        // Handle mouse click down
         if (Input.GetMouseButtonDown(0))
         {
             if (TryHandleUnitSelection()) return;
@@ -29,6 +30,10 @@ public class UnitActionSystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Try select a unit when mouse click on it
+    /// </summary>
+    /// <returns></returns>
     private bool TryHandleUnitSelection()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -44,12 +49,20 @@ public class UnitActionSystem : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Set the selected unit and fire OnSelectedUnit event
+    /// </summary>
+    /// <param name="unit"></param>
     private void SetSelectedUnit(Unit unit)
     {
         selectedUnit = unit;
         OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// Get selected unit
+    /// </summary>
+    /// <returns></returns>
     public Unit GetSelectedUnit()
     {
         return selectedUnit;
