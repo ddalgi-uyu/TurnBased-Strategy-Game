@@ -16,6 +16,7 @@ public class Unit : MonoBehaviour
 
     private void Start()
     {
+        // Add unit to the grid object
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
     }
@@ -27,7 +28,6 @@ public class Unit : MonoBehaviour
         {
             Vector3 moveDirection = (targetPosition - transform.position).normalized;
             transform.position += moveDirection * Time.deltaTime * moveSpeed;
-
             transform.forward = Vector3.Lerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
             unityAnimator.SetBool("isWalking", true);
         }
@@ -36,6 +36,7 @@ public class Unit : MonoBehaviour
             unityAnimator.SetBool("isWalking", false);
         }
 
+        // Update grid position as it moves
         GridPosition newGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         if (newGridPosition != gridPosition)
         {

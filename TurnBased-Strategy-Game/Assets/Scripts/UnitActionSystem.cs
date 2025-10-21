@@ -25,7 +25,10 @@ public class UnitActionSystem : MonoBehaviour
         // Handle mouse click down
         if (Input.GetMouseButtonDown(0))
         {
+            // Try handle unit selection
             if (TryHandleUnitSelection()) return;
+
+            // If there is no unit selection, it means the moues click is for movement
             selectedUnit.Move(MouseWorld.GetPosition());
         }
     }

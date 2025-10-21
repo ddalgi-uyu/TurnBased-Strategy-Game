@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class GridSystem : MonoBehaviour
 {
+    [SerializeField] private bool debug = false;
+
     private int width;
     private int height;
     private int cellSize;
-    private GridObject[,] gridObjectArray; 
 
-    [SerializeField] private bool debug = false;
+    private GridObject[,] gridObjectArray; 
 
     public GridSystem(int width, int height, int cellSize)
     {
@@ -17,6 +18,7 @@ public class GridSystem : MonoBehaviour
 
         gridObjectArray = new GridObject[width, height];
 
+        // Create grid objects for the given grid size
         for (int x = 0; x < width; x++)
         {
             for (int z = 0; z < height; z++)
