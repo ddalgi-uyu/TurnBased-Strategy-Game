@@ -29,7 +29,7 @@ public class UnitActionSystem : MonoBehaviour
             if (TryHandleUnitSelection()) return;
 
             // If there is no unit selection, it means the moues click is for movement
-            selectedUnit.Move(MouseWorld.GetPosition());
+            selectedUnit.GetMoveAction().Move(MouseWorld.GetPosition());
         }
     }
 

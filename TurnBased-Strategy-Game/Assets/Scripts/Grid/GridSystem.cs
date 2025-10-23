@@ -73,4 +73,12 @@ public class GridSystem : MonoBehaviour
     {
         return gridObjectArray[gridPosition.x, gridPosition.z];
     }
+
+    public bool IsValidGridPosition(GridPosition gridPosition)
+    {
+        return gridPosition.x >= 0 &&
+            gridPosition.z >=0 &&
+            gridPosition.x < width &&
+            gridPosition.z < height;
+    }
 }
