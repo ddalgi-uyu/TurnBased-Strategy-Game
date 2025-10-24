@@ -28,8 +28,14 @@ public class UnitActionSystem : MonoBehaviour
             // Try handle unit selection
             if (TryHandleUnitSelection()) return;
 
-            // If there is no unit selection, it means the moues click is for movement
-            selectedUnit.GetMoveAction().Move(MouseWorld.GetPosition());
+            GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
+
+            if (LevelGrid.Instance.IsValidGridPosition(mouseGridPosition))
+            {
+                // If there is no unit selection, it means the moues click is for movement
+                // Move unit by grid position so that the unit can not go to corner or position that do not make sence
+                selectedUnit.GetMoveAction().Move(mouseGridPosition);
+            }
         }
     }
 
