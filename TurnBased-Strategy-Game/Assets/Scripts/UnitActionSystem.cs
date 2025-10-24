@@ -10,6 +10,8 @@ public class UnitActionSystem : MonoBehaviour
     [SerializeField] private Unit selectedUnit;
     [SerializeField] LayerMask unitLayerMask;
 
+    private bool isBusy;
+
     private void Awake()
     {
         if(Instance != null)
@@ -30,11 +32,11 @@ public class UnitActionSystem : MonoBehaviour
 
             GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
 
-            if (LevelGrid.Instance.IsValidGridPosition(mouseGridPosition))
+            if (selectedUnit.GetMoveAction().IsValidGridPosition(mouseGridPosition))
             {
                 // If there is no unit selection, it means the moues click is for movement
                 // Move unit by grid position so that the unit can not go to corner or position that do not make sence
-                selectedUnit.GetMoveAction().Move(mouseGridPosition);
+                selectedUnit.GetMoveAction().Move(mouseGridPosition, ClearBusy);
             }
         }
     }
@@ -75,5 +77,15 @@ public class UnitActionSystem : MonoBehaviour
     public Unit GetSelectedUnit()
     {
         return selectedUnit;
+    }
+
+    private void SetBusy()
+    {
+        isBusy = true;
+    }
+
+    private void ClearBusy()
+    {
+        isBusy = false;
     }
 }
