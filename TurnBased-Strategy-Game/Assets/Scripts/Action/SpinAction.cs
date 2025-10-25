@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpinAction : BaseAction
@@ -20,7 +21,8 @@ public class SpinAction : BaseAction
         OnActionComplete();
     }
 
-    public void Spin(Action onSpinComplete)
+    // When things goes complex, consider create a base class and make it as the parameter. In the function, cast it to the sub type. 
+    public override void TakeAction(GridPosition gridPosition, Action onSpinComplete)
     {
         this.OnActionComplete = onSpinComplete;
         isActive = true;
@@ -29,5 +31,15 @@ public class SpinAction : BaseAction
     public override string GetActionName()
     {
         return "Spin";
+    }
+
+    public override List<GridPosition> GetValidGridActionPositionList()
+    {
+        GridPosition gridPosition = unit.GetGridPosition();
+
+        return new List<GridPosition>
+        {
+            gridPosition
+        };
     }
 }

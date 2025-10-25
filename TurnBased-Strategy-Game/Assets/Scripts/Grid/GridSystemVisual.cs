@@ -20,7 +20,7 @@ public class GridSystemVisual : MonoBehaviour
         Instance = this;
     }
 
-    public void Strart(){
+    public void Start(){
         gridSystemVisualSingles = new GridSystemVisualSingle[LevelGrid.Instance.GetWidth(), LevelGrid.Instance.GetHeight()];
         for (int x = 0; x < LevelGrid.Instance.GetWidth(); x++)
         {
@@ -57,11 +57,14 @@ public class GridSystemVisual : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update grid visual based on the current selected action
+    /// </summary>
     private void UpdateGridVisual()
     {
         HideAllGridPosition();
 
-        Unit selectedUnit = UnitActionSystem.Instance.GetSelectedUnit();
-        ShowAllGridPositionList(selectedUnit.GetMoveAction().GetValidGridActionPositionList());
+        BaseAction selectedAction = UnitActionSystem.Instance.GetSelectedAction();
+        ShowAllGridPositionList(selectedAction.GetValidGridActionPositionList());
     }
 }

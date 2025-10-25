@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 public class UnitActionSystem : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UnitActionSystem : MonoBehaviour
 
     [SerializeField] private Unit selectedUnit;
     [SerializeField] LayerMask unitLayerMask;
+    [SerializeField] private BaseAction selectedAction;
 
     private bool isBusy;
 
@@ -22,21 +24,41 @@ public class UnitActionSystem : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        SetSelectedUnit(selectedUnit);
+    }
+
     private void Update()
+    {
+        if (isBusy)
+        {
+            return;
+        }
+
+        // Check if the mouse is clicking over a UI button
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        // Try handle unit selection
+        if (TryHandleUnitSelection()) return;
+
+        HandleSelectedAction();
+    }
+
+    private void HandleSelectedAction()
     {
         // Handle mouse click down
         if (Input.GetMouseButtonDown(0))
         {
-            // Try handle unit selection
-            if (TryHandleUnitSelection()) return;
-
             GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
 
-            if (selectedUnit.GetMoveAction().IsValidGridPosition(mouseGridPosition))
+            if (selectedAction.IsValidGridPosition(mouseGridPosition))
             {
-                // If there is no unit selection, it means the moues click is for movement
-                // Move unit by grid position so that the unit can not go to corner or position that do not make sence
-                selectedUnit.GetMoveAction().Move(mouseGridPosition, ClearBusy);
+                SetBusy();
+                selectedAction.TakeAction(mouseGridPosition, ClearBusy);
             }
         }
     }
@@ -52,6 +74,11 @@ public class UnitActionSystem : MonoBehaviour
         {
             if(rayCastHit.transform.TryGetComponent<Unit>(out Unit unit))
             {
+                if(unit == selectedUnit)
+                {
+                    return false;
+                }
+
                 SetSelectedUnit(unit);
                 return true;
             }
@@ -67,7 +94,13 @@ public class UnitActionSystem : MonoBehaviour
     private void SetSelectedUnit(Unit unit)
     {
         selectedUnit = unit;
+        SetSelectedAction(selectedUnit.GetMoveAction());
         OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void SetSelectedAction(BaseAction baseAction)
+    {
+        selectedAction = baseAction;
     }
 
     /// <summary>
@@ -87,5 +120,10 @@ public class UnitActionSystem : MonoBehaviour
     private void ClearBusy()
     {
         isBusy = false;
+    }
+
+    public BaseAction GetSelectedAction()
+    {
+        return selectedAction;
     }
 }
