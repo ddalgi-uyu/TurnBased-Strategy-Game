@@ -64,6 +64,7 @@ public class GridSystem : MonoBehaviour
                 Transform debugTransform = GameObject.Instantiate(debugPrefab, GetWorldPosition(gridPosition), Quaternion.identity);
                 GridDebugObject gridDebugObject = debugTransform.GetComponent<GridDebugObject>();
 
+                // The debug text in set inside the grid debug object
                 gridDebugObject.SetGridObject(GetGridObject(gridPosition));
             }
         }

@@ -305,6 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 2991844933021966083}
   button: {fileID: 1874891744442854813}
+  selectedImage: {fileID: 4943380177786280119}
 --- !u!1 &4943380177786280119
 GameObject:
   m_ObjectHideFlags: 0

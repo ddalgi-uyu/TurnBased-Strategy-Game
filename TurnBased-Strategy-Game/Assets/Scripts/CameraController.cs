@@ -7,7 +7,7 @@ using static UnityEngine.GridBrushBase;
 public class CameraController : MonoBehaviour
 {
     private float moveSpeed = 5f;
-    private float rotateSpeed = 1.0f;
+    private float rotateSpeed = 10.0f;
     [SerializeField] private CinemachineVirtualCamera cinemachineCamera;
     private const float MAX_FOLLOW_Y_OFFSET = 2f;
     private const float MIN_FOLLOW_Y_OFFSET = 12f;
@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        cinemachineTransposer = cinemachineCamera.GetComponent<CinemachineTransposer>();
+        cinemachineTransposer = cinemachineCamera.GetCinemachineComponent<CinemachineTransposer>();
         targetFollowOffset = cinemachineTransposer.m_FollowOffset;
     }
 
@@ -82,6 +82,10 @@ public class CameraController : MonoBehaviour
         }
         targetFollowOffset.y = Mathf.Clamp(targetFollowOffset.y, MIN_FOLLOW_Y_OFFSET, MAX_FOLLOW_Y_OFFSET);
 
+        if(zoomAmount == 1f)
+        {
+            return;
+        }
         float zoomSpeed = 5f;
         cinemachineTransposer.m_FollowOffset = Vector3.Lerp(cinemachineTransposer.m_FollowOffset, targetFollowOffset, Time.deltaTime * zoomSpeed);
     }

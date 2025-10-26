@@ -9,7 +9,7 @@ public class GridDebugObject : MonoBehaviour
 
     private void Update()
     {
-        if (gridObject == null)
+        if (gridObject != null)
             textMeshPro.text = gridObject.ToString();
     }
 
