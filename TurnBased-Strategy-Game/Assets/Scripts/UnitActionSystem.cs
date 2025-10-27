@@ -39,6 +39,11 @@ public class UnitActionSystem : MonoBehaviour
             return;
         }
 
+        if (!TurnSystem.Instance.IsPlayerTurn())
+        {
+            return;
+        }
+
         // Check if the mouse is clicking over a UI button
         if (EventSystem.current.IsPointerOverGameObject())
         {
@@ -83,6 +88,11 @@ public class UnitActionSystem : MonoBehaviour
             if(rayCastHit.transform.TryGetComponent<Unit>(out Unit unit))
             {
                 if(unit == selectedUnit)
+                {
+                    return false;
+                }
+
+                if (unit.IsEnemy())
                 {
                     return false;
                 }
