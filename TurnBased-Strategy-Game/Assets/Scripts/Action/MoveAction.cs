@@ -8,9 +8,7 @@ public class MoveAction : BaseAction
     [SerializeField] private Animator unityAnimator;
     [SerializeField] private int maxDistance = 1;
     private Vector3 targetPosition;
-    private float moveSpeed = 4f;
     private float stoppingDistance = .1f;
-    private float rotationSpeed = 10f;
 
     protected override void Awake()
     {
@@ -27,6 +25,8 @@ public class MoveAction : BaseAction
         // Move unit to target position with animation
         if (Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
         {
+            float rotationSpeed = 10f;
+            float moveSpeed = 4f;
             Vector3 moveDirection = (targetPosition - transform.position).normalized;
             transform.position += moveDirection * Time.deltaTime * moveSpeed;
             transform.forward = Vector3.Lerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);

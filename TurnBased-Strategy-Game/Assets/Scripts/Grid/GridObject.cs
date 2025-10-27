@@ -44,4 +44,14 @@ public class GridObject
     {
         return unitList.Count > 0;
     }
+
+    public Unit GetFirstUnit()
+    {
+        if (HasAnyUnit())
+        {
+            return unitList[0];
+        }
+
+        return null;
+    }
 }

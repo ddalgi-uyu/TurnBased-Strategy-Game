@@ -943,6 +943,7 @@ GameObject:
   - component: {fileID: 7486294624488701800}
   - component: {fileID: 2641884965274302229}
   - component: {fileID: 8695881814420184925}
+  - component: {fileID: 4857318262637559585}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Untagged
@@ -979,6 +980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88382624f64c5140a2da941a4f88069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemy: 0
 --- !u!95 &6473488366584893594
 Animator:
   serializedVersion: 7
@@ -1048,7 +1050,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7bf63645eadbf408fa3c121a4f82e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSpinning: 0
+--- !u!114 &4857318262637559585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3812579065360372086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93688efca6e91bd4b8509d3fd23cef79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4124562212883419960
 GameObject:
   m_ObjectHideFlags: 0
