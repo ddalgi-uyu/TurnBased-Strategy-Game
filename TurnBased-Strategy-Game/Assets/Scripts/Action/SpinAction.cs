@@ -17,15 +17,13 @@ public class SpinAction : BaseAction
         }
 
         transform.Rotate(0, 360 * Time.deltaTime, 0);
-        isActive = false;
-        OnActionComplete();
+        ActionComplete();
     }
 
     // When things goes complex, consider create a base class and make it as the parameter. In the function, cast it to the sub type. 
-    public override void TakeAction(GridPosition gridPosition, Action onSpinComplete)
+    public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        this.OnActionComplete = onSpinComplete;
-        isActive = true;
+        ActionStart(onActionComplete);
     }
 
     public override string GetActionName()

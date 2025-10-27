@@ -35,16 +35,14 @@ public class MoveAction : BaseAction
         else
         {
             unityAnimator.SetBool("isWalking", false);
-            isActive = false;
-            OnActionComplete();
+            ActionComplete();
         }
     }
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        this.OnActionComplete = onActionComplete;
+        ActionStart(onActionComplete);
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
-        isActive = true;
     }
 
 
