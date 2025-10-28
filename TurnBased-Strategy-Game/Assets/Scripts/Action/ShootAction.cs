@@ -13,7 +13,10 @@ public class ShootAction : BaseAction
         Cooloff,
     }
 
+    public event EventHandler OnShoot;
+
     [SerializeField] private bool debug = false;
+
     private int maxShootDistance = 7;
     private State state;
     private float stateTimer;
@@ -78,6 +81,7 @@ public class ShootAction : BaseAction
 
     private void Shoot()
     {
+        OnShoot?.Invoke(this, EventArgs.Empty);
         targetUnit.Damage();
     }
 

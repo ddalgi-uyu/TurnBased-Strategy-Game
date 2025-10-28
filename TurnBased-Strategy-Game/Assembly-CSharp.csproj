@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\Action\ShootAction.cs" />
     <Compile Include="Assets\Scripts\UI\ActionButtonUI.cs" />
+    <Compile Include="Assets\Scripts\UnitAnimator.cs" />
     <Compile Include="Assets\Scripts\Grid\GridSystemVisualSingle.cs" />
     <Compile Include="Assets\Scripts\Grid\GridDebugObject.cs" />
     <Compile Include="Assets\Scripts\Grid\GridSystem.cs" />

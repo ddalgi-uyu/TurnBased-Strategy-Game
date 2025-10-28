@@ -2,10 +2,13 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class MoveAction : BaseAction
 {
-    [SerializeField] private Animator unityAnimator;
+    public event EventHandler OnStartMoving;
+    public event EventHandler OnStopMoving;
+
     [SerializeField] private int maxDistance = 1;
     private Vector3 targetPosition;
     private float stoppingDistance = .1f;
@@ -30,12 +33,12 @@ public class MoveAction : BaseAction
             Vector3 moveDirection = (targetPosition - transform.position).normalized;
             transform.position += moveDirection * Time.deltaTime * moveSpeed;
             transform.forward = Vector3.Lerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
-            unityAnimator.SetBool("isWalking", true);
         }
         else
         {
-            unityAnimator.SetBool("isWalking", false);
             ActionComplete();
+
+            OnStopMoving?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -43,6 +46,8 @@ public class MoveAction : BaseAction
     {
         ActionStart(onActionComplete);
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+
+        OnStartMoving?.Invoke(this, EventArgs.Empty);
     }
 
 
