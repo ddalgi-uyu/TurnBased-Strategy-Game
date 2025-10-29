@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Grid\GridSystem.cs" />
     <Compile Include="Assets\Scripts\Grid\GridObject.cs" />
     <Compile Include="Assets\Scripts\UI\ActionBusyUI.cs" />
+    <Compile Include="Assets\Scripts\BulletProjectile.cs" />
     <Compile Include="Assets\Scripts\MouseWorld.cs" />
     <Compile Include="Assets\Scripts\LevelGrid.cs" />
     <Compile Include="Assets\Scripts\Action\SpinAction.cs" />
