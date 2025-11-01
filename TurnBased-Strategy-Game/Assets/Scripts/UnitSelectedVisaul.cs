@@ -19,6 +19,11 @@ public class UnitSelectedVisaul : MonoBehaviour
         UpdateVisual();
     }
 
+    private void OnDestroy()
+    {
+        UnitActionSystem.Instance.OnSelectedUnitChanged -= UnitActionSystem_OnSelectedUnitChanged;
+    }
+
     private void UnitActionSystem_OnSelectedUnitChanged(object sender, EventArgs args)
     {
         UpdateVisual();
