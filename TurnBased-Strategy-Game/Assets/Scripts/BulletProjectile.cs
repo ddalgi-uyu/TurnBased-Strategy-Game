@@ -20,7 +20,7 @@ public class BulletProjectile : MonoBehaviour
         transform.position += moveDirection * moveSpeed * Time.deltaTime;
 
         float distanceAfterMoving = Vector3.Distance(transform.position, targetPosition);
-        if(distanceBeforeMoving <  distanceAfterMoving)
+        if(distanceBeforeMoving < distanceAfterMoving)
         {
             transform.position = targetPosition;
             trailRenderer.transform.parent = null; //Detach from the parent

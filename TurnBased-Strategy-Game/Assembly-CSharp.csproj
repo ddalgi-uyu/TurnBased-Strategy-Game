@@ -81,9 +81,11 @@
     <Compile Include="Assets\Scripts\Grid\GridSystemVisual.cs" />
     <Compile Include="Assets\Scripts\TurnSystem.cs" />
     <Compile Include="Assets\Scripts\Action\BaseAction.cs" />
+    <Compile Include="Assets\Scripts\UnitRagdoll.cs" />
     <Compile Include="Assets\Scripts\UnitSelectedVisaul.cs" />
     <Compile Include="Assets\Scripts\Action\MoveAction.cs" />
     <Compile Include="Assets\Scripts\UI\TurnSystemUI.cs" />
+    <Compile Include="Assets\Scripts\UnitRagdollSpawner.cs" />
     <Compile Include="Assets\Scripts\UI\UnitActionSystemUI.cs" />
     <Compile Include="Assets\Scripts\Testing.cs" />
     <Compile Include="Assets\Scripts\Grid\GridPosition.cs" />
