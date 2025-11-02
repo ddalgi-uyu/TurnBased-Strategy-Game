@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class UnitAnimator : MonoBehaviour
@@ -33,13 +34,39 @@ public class UnitAnimator : MonoBehaviour
 
     private void ShootAction_OnShoot(object sender, ShootAction.OnShootEventArgs args)
     {
+        // Validate prefab
+        if (bulletProjectilePrefab == null)
+        {
+            Debug.LogError("Bullet prefab is not assigned!");
+            return;
+        }
+
         animator.SetTrigger("shoot");
 
-        Transform bulletProjectileTransform = Instantiate(bulletProjectilePrefab, shootPointTransform.position, Quaternion.identity);
-        BulletProjectile bulletProjectile = bulletProjectileTransform.GetComponent<BulletProjectile>();
+        // Instantiate
+        Transform bulletTransform = Instantiate(
+            bulletProjectilePrefab,
+            shootPointTransform.position,
+            Quaternion.identity
+        );
 
-        Vector3 targetUnitShootAtPosition = args.targetUnit.GetWorldPosition(); //At the feet position
-        targetUnitShootAtPosition.y = shootPointTransform.position.y;
-        bulletProjectile.Setup(targetUnitShootAtPosition);
+        BulletProjectile bullet = bulletTransform.GetComponent<BulletProjectile>();
+
+        if (bullet == null)
+        {
+            Debug.LogError($"BulletProjectile component missing on prefab: {bulletProjectilePrefab.name}");
+            Destroy(bulletTransform.gameObject);
+            return;
+        }
+
+        // Setup bullet
+        Vector3 targetPosition = args.targetUnit.GetWorldPosition();
+        targetPosition.y = shootPointTransform.position.y;
+        bullet.Setup(targetPosition);
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(1f);
     }
 }

@@ -82,26 +82,29 @@ public class UnitActionSystem : MonoBehaviour
     /// <returns></returns>
     private bool TryHandleUnitSelection()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out RaycastHit rayCastHit, float.MaxValue, unitLayerMask))
+        if (Input.GetMouseButtonDown(0))
         {
-            if(rayCastHit.transform.TryGetComponent<Unit>(out Unit unit))
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit rayCastHit, float.MaxValue, unitLayerMask))
             {
-                if(unit == selectedUnit)
+                if (rayCastHit.transform.TryGetComponent<Unit>(out Unit unit))
                 {
-                    return false;
-                }
+                    if (unit == selectedUnit)
+                    {
+                        return false;
+                    }
 
-                if (unit.IsEnemy())
-                {
-                    return false;
-                }
+                    if (unit.IsEnemy())
+                    {
+                        return false;
+                    }
 
-                SetSelectedUnit(unit);
-                return true;
+                    SetSelectedUnit(unit);
+                    return true;
+                }
             }
         }
-
+        
         return false;
     }
 

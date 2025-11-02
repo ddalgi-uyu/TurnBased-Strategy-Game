@@ -12,7 +12,7 @@ public class BulletProjectile : MonoBehaviour
 
     private void Update()
     {
-        Vector3 moveDirection = (targetPosition -  transform.position).normalized;
+        Vector3 moveDirection = (targetPosition - transform.position).normalized;
 
         float distanceBeforeMoving = Vector3.Distance(transform.position, targetPosition);
 
@@ -20,13 +20,12 @@ public class BulletProjectile : MonoBehaviour
         transform.position += moveDirection * moveSpeed * Time.deltaTime;
 
         float distanceAfterMoving = Vector3.Distance(transform.position, targetPosition);
-        if(distanceBeforeMoving < distanceAfterMoving)
+        if (distanceBeforeMoving < distanceAfterMoving)
         {
             transform.position = targetPosition;
             trailRenderer.transform.parent = null; //Detach from the parent
             Destroy(gameObject);
             Instantiate(bulletHitVFXPrefab, targetPosition, Quaternion.identity);
         }
-
     }
 }

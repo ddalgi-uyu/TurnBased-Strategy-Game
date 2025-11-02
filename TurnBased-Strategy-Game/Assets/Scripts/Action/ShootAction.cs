@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -31,6 +32,7 @@ public class ShootAction : BaseAction
 
     private void Update()
     {
+        //Debug.Log("ative: " + isActive);
         if (!isActive)
         {
             return;
@@ -46,6 +48,7 @@ public class ShootAction : BaseAction
                 transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * rotationSpeed);
                 break;
             case State.Shooting:
+                Debug.Log("can shoot: " + canShootBullet);
                 if (canShootBullet)
                 {
                     Shoot();
@@ -55,6 +58,7 @@ public class ShootAction : BaseAction
             case State.Cooloff:
                 break;
         }
+        Debug.Log("timer: " + stateTimer + "state: " + state);
 
         if (stateTimer <= 0)
         {
@@ -87,6 +91,7 @@ public class ShootAction : BaseAction
 
     private void Shoot()
     {
+        Debug.Log("target unit: " + targetUnit);
         OnShoot?.Invoke(this, new OnShootEventArgs
         {
             targetUnit = targetUnit,

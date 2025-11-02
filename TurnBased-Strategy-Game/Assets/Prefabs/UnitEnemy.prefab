@@ -16,17 +16,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4790479255157481416, guid: 7d63b773f1f569f4f9f143dae384f59c, type: 3}
+      propertyPath: isEnemy
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4881176478851087250, guid: 7d63b773f1f569f4f9f143dae384f59c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.0259037
       objectReference: {fileID: 0}
     - target: {fileID: 4881176478851087250, guid: 7d63b773f1f569f4f9f143dae384f59c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 4881176478851087250, guid: 7d63b773f1f569f4f9f143dae384f59c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.6186712
       objectReference: {fileID: 0}
     - target: {fileID: 4881176478851087250, guid: 7d63b773f1f569f4f9f143dae384f59c, type: 3}
       propertyPath: m_LocalRotation.w
