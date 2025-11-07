@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\LookAtCamera.cs" />
     <Compile Include="Assets\Scripts\UI\UnitActionSystemUI.cs" />
     <Compile Include="Assets\Scripts\Testing.cs" />
+    <Compile Include="Assets\Scripts\CameraManager.cs" />
     <Compile Include="Assets\Scripts\Grid\GridPosition.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
   </ItemGroup>
