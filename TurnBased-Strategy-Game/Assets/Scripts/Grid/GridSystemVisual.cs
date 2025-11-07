@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using NUnit.Framework;
@@ -32,11 +33,16 @@ public class GridSystemVisual : MonoBehaviour
                 gridSystemVisualSingles[x, z] = gridSystemVisualSingleTransform.GetComponent<GridSystemVisualSingle>();
             }
         }
+
+        UnitActionSystem.Instance.OnSelectedActionChanged += UnitActionSystem_OnSelectedActionChanged;
+        LevelGrid.Instance.OnAnyUnitMovedGridPosition += LevelGrid_OnAnyUnitMovedGridPosition;
+
+        UpdateGridVisual();
     }
 
     private void Update()
     {
-        UpdateGridVisual();
+        
     }
 
     public void HideAllGridPosition()
@@ -66,5 +72,15 @@ public class GridSystemVisual : MonoBehaviour
 
         BaseAction selectedAction = UnitActionSystem.Instance.GetSelectedAction();
         ShowAllGridPositionList(selectedAction.GetValidGridActionPositionList());
+    }
+
+    private void UnitActionSystem_OnSelectedActionChanged(object sender, EventArgs args)
+    {
+        UpdateGridVisual();
+    }
+
+    private void LevelGrid_OnAnyUnitMovedGridPosition(object sender, EventArgs args)
+    {
+        UpdateGridVisual();
     }
 }
