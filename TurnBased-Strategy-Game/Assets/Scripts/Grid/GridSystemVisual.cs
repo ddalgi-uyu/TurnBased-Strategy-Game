@@ -9,7 +9,24 @@ public class GridSystemVisual : MonoBehaviour
     public static GridSystemVisual Instance { get; private set; }
     [SerializeField] private Transform gridSystemVisualSinglePrefab;
 
-    private GridSystemVisualSingle[,] gridSystemVisualSingles;
+    [Serializable]
+    public struct GridVisualTypeMatetial
+    {
+        public GridVisualType gridVisualType;
+        public Material material;
+    }
+
+    public enum GridVisualType
+    {
+        White,
+        Blue,
+        Red,
+        Yellow
+    }
+
+    [SerializeField] private GridSystemVisualSingle[,] gridSystemVisualSingles;
+    [SerializeField] private List<GridVisualTypeMatetial> gridVisualTypes;
+
 
     public void Awake()
     {
