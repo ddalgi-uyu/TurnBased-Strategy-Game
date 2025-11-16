@@ -14,6 +14,7 @@ public class Unit : MonoBehaviour
     private GridPosition gridPosition;
     private MoveAction moveAction;
     private SpinAction spinAction;
+    private ShootAction shootAction;
     private BaseAction[] baseActionArray;
     private int actionPoints = ACTION_POINTS_MAX;
     private HealthSystem healthSystem;
@@ -22,6 +23,7 @@ public class Unit : MonoBehaviour
     {
         moveAction = GetComponent<MoveAction>();
         spinAction = GetComponent<SpinAction>();
+        shootAction = GetComponent<ShootAction>();
         baseActionArray = GetComponents<BaseAction>();
         healthSystem = GetComponent<HealthSystem>();
     }
@@ -59,6 +61,11 @@ public class Unit : MonoBehaviour
         return spinAction; 
     }    
 
+    public ShootAction GetShootAction()
+    {
+        return shootAction;
+    }
+
     public GridPosition GetGridPosition()
     {
         return gridPosition;
@@ -81,7 +88,7 @@ public class Unit : MonoBehaviour
 
     public bool CanSpendActionPointsToTakeAction(BaseAction baseAction)
     {
-        if(actionPoints >= baseAction.GetActionPointsCost())
+        if (actionPoints >= baseAction.GetActionPointsCost())
         {
             return true;
         }

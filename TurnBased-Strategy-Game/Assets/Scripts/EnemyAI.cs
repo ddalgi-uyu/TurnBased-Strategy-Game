@@ -44,7 +44,7 @@ public class EnemyAI : MonoBehaviour
                     }
                     else
                     {
-                        // No more enemy have action point left to take
+                        // No more enemies have action point left to take
                         TurnSystem.Instance.NextTurn();
                     }
                 }
@@ -69,8 +69,35 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private bool TryTakeEnemyAIAction(Action onEnemyActionComplete)
+    private bool TryTakeEnemyAIAction(Unit enemyUnit, Action onEnemyActionComplete)
     {
+        EnemyAIAction bestEnemyAIAction = null;
+        BaseAction baseAIAction = null;
+
+        foreach (BaseAction baseAction in enemyUnit.GetBaseActionArray())
+        {
+            if (!enemyUnit.CanSpendActionPointsToTakeAction(baseAction))
+            {
+                continue;
+            }
+
+            if (bestEnemyAIAction == null)
+            {
+                bestEnemyAIAction = baseAction.GetBestEnemyAIAction();
+                baseAIAction = baseAction;
+            }
+            else
+            {
+                EnemyAIAction testEnemyAIAction = baseAction.GetBestEnemyAIAction();
+                if (testEnemyAIAction != null && testEnemyAIAction.actionValue >  bestEnemyAIAction.actionValue)
+                {
+                    bestEnemyAIAction = testEnemyAIAction;
+                    baseAIAction = baseAction;
+                }
+            }
+
+        }
+
         foreach (Unit enemyUnit in UnitManager.Instance.GetEnemyUnitList())
         {
             if (TryTakeEnemyAIAction(enemyUnit, onEnemyActionComplete))

@@ -107,9 +107,14 @@ public class ShootAction : BaseAction
 
     public override List<GridPosition> GetValidGridActionPositionList()
     {
+        GridPosition unitGridPosition = unit.GetGridPosition();
+        return GetValidGridActionPositionList(unitGridPosition);
+    }
+
+    public List<GridPosition> GetValidGridActionPositionList(GridPosition gridPosition)
+    {
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
-        GridPosition unitGridPosition = unit.GetGridPosition();
 
         for (int x = -maxShootDistance; x <= maxShootDistance; x++)
         {
@@ -168,5 +173,19 @@ public class ShootAction : BaseAction
     public int GetMaxShootDistance()
     {
         return maxShootDistance;
+    }
+
+    public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
+    {
+        return new EnemyAIAction
+        {
+            gridPosition = gridPosition,
+            actionValue = 100,
+        };
+    }
+
+    public int GetTargetCountAtPosition(GridPosition gridPosition)
+    {
+        return GetValidGridActionPositionList(gridPosition).Count;
     }
 }
