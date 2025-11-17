@@ -177,10 +177,12 @@ public class ShootAction : BaseAction
 
     public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
     {
+        Unit targetUnit = LevelGrid.Instance.GetFirstUnitAtGridPosition(gridPosition);
+
         return new EnemyAIAction
         {
             gridPosition = gridPosition,
-            actionValue = 100,
+            actionValue = 100 + Mathf.RoundToInt(1 - targetUnit.GetHealthNormalized() * 100f),
         };
     }
 

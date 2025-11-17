@@ -98,6 +98,17 @@ public class EnemyAI : MonoBehaviour
 
         }
 
+        if (bestEnemyAIAction != null && enemyUnit.TrySpendActionPointsToTakeAction(baseAIAction))
+        {
+            baseAIAction.TakeAction(bestEnemyAIAction.gridPosition, onEnemyActionComplete);
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool TryTakeEnemyAIAction(Action onEnemyActionComplete)
+    {
         foreach (Unit enemyUnit in UnitManager.Instance.GetEnemyUnitList())
         {
             if (TryTakeEnemyAIAction(enemyUnit, onEnemyActionComplete))
@@ -106,11 +117,6 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        return false;
-    }
-
-    private bool TryTakeEnemyAIAction(Unit unit, Action onEnemyActionComplete)
-    {
         return false;
     }
 }
