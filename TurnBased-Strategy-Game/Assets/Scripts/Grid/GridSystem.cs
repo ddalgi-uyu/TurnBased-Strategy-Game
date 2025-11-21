@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 
-public class GridSystem : MonoBehaviour
+public class GridSystem<TGridObject> : MonoBehaviour
 {
     [SerializeField] private bool debug = false;
 
@@ -8,15 +9,15 @@ public class GridSystem : MonoBehaviour
     private int height;
     private int cellSize;
 
-    private GridObject[,] gridObjectArray; 
+    private TGridObject[,] gridObjectArray; 
 
-    public GridSystem(int width, int height, int cellSize)
+    public GridSystem(int width, int height, int cellSize, Func<GridSystem<TGridObject>, GridPosition, TGridObject> createGridObject)
     {
         this.width = width;
         this.height = height;
         this.cellSize = cellSize;
 
-        gridObjectArray = new GridObject[width, height];
+        gridObjectArray = new TGridObject[width, height];
 
         // Create grid objects for the given grid size
         for (int x = 0; x < width; x++)
@@ -24,7 +25,7 @@ public class GridSystem : MonoBehaviour
             for (int z = 0; z < height; z++)
             {
                 GridPosition gridPosition = new GridPosition(x, z);
-                gridObjectArray[x, z] = new GridObject(this, gridPosition);
+                gridObjectArray[x, z] = createGridObject(this, gridPosition);
 
                 if (debug)
                     Debug.DrawLine(GetWorldPosition(gridPosition), GetWorldPosition(gridPosition) + Vector3.right * .2f, Color.white, 1000);
@@ -65,12 +66,12 @@ public class GridSystem : MonoBehaviour
                 GridDebugObject gridDebugObject = debugTransform.GetComponent<GridDebugObject>();
 
                 // The debug text in set inside the grid debug object
-                gridDebugObject.SetGridObject(GetGridObject(gridPosition));
+                gridDebugObject.SetGridObject(GetGridObject(gridPosition) as GridObject);
             }
         }
     }
 
-    public GridObject GetGridObject(GridPosition gridPosition)
+    public TGridObject GetGridObject(GridPosition gridPosition)
     {
         return gridObjectArray[gridPosition.x, gridPosition.z];
     }
