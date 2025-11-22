@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Grid\GridObject.cs" />
     <Compile Include="Assets\Scripts\UI\ActionBusyUI.cs" />
     <Compile Include="Assets\Scripts\BulletProjectile.cs" />
+    <Compile Include="Assets\Scripts\PathNode.cs" />
     <Compile Include="Assets\Scripts\MouseWorld.cs" />
     <Compile Include="Assets\Scripts\LevelGrid.cs" />
     <Compile Include="Assets\Scripts\Action\SpinAction.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Scripts\TurnSystem.cs" />
     <Compile Include="Assets\Scripts\Action\BaseAction.cs" />
     <Compile Include="Assets\Scripts\UnitRagdoll.cs" />
+    <Compile Include="Assets\Scripts\PathFinding.cs" />
     <Compile Include="Assets\Scripts\UnitSelectedVisaul.cs" />
     <Compile Include="Assets\Scripts\Action\MoveAction.cs" />
     <Compile Include="Assets\Scripts\UI\TurnSystemUI.cs" />
