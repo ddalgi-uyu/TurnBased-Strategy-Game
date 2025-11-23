@@ -66,7 +66,7 @@ public class GridSystem<TGridObject> : MonoBehaviour
                 GridDebugObject gridDebugObject = debugTransform.GetComponent<GridDebugObject>();
 
                 // The debug text in set inside the grid debug object
-                gridDebugObject.SetGridObject(GetGridObject(gridPosition) as GridObject);
+                gridDebugObject.SetGridObject(GetGridObject(gridPosition));
             }
         }
     }

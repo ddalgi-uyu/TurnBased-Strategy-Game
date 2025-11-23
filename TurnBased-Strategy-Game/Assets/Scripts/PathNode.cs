@@ -17,4 +17,19 @@ public class PathNode
     {
         return gridPosition.ToString();
     }
+
+    public int getGCost()
+    {
+        return gCost;
+    }
+
+    public int getHCost()
+    {
+        return hCost;
+    }
+
+    public int getFCost()
+    {
+        return fCost;
+    }
 }
