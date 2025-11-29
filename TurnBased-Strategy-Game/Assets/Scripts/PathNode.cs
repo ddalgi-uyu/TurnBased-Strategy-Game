@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PathNode
@@ -18,18 +19,53 @@ public class PathNode
         return gridPosition.ToString();
     }
 
-    public int getGCost()
+    public int GetGCost()
     {
         return gCost;
     }
 
-    public int getHCost()
+    public int GetHCost()
     {
         return hCost;
     }
 
-    public int getFCost()
+    public int GetFCost()
     {
         return fCost;
+    }
+
+    public void SetGCost(int gCost)
+    {
+        this.gCost = gCost;
+    }
+
+    public void SetHCost(int hCost)
+    {
+        this.hCost = hCost;
+    }
+
+    public void CalculateFCost()
+    {
+        this.fCost = hCost + gCost;
+    }
+
+    public void ResetCameFromNode()
+    {
+        this.cameFromPathNode = null;
+    } 
+
+    public GridPosition GetGridPosition()
+    {
+        return gridPosition;  
+    }
+
+    public void SetCameFromPathNode(PathNode pathNode)
+    {
+        this.cameFromPathNode = pathNode;
+    }
+
+    public PathNode GetCameFromePathNode()
+    {
+        return cameFromPathNode;
     }
 }
