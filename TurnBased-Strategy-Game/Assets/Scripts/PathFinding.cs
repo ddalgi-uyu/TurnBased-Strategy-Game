@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PathFinding : MonoBehaviour
 {
+    public static PathFinding Instance {  get; private set; } 
     private const int MOVE_STRAIGHT_COST = 10;
     private const int MOVE_DIAGONAL_COST = 14;
 
@@ -15,9 +16,26 @@ public class PathFinding : MonoBehaviour
 
     private void Awake()
     {
-        gridSystem = new GridSystem<PathNode>(10, 10, 2,
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
+    public void Setup(int width, int height, int cellSize)
+    {
+        this.width = width;
+        this.height = height;
+        this.cellSize = cellSize;
+
+        gridSystem = new GridSystem<PathNode>(width, height, cellSize,
             (GridSystem<PathNode> g, GridPosition gridPosition) => new PathNode(gridPosition));
         gridSystem.CreateDebugObject(gridDebugPrefab);
+
+        GetNode(1, 0).SetIsWalkable(false);
+        GetNode(1, 1).SetIsWalkable(false);
     }
 
     public List<GridPosition> FindPath(GridPosition startPostion, GridPosition endPosition)
@@ -57,7 +75,7 @@ public class PathFinding : MonoBehaviour
             }
 
             openList.Remove(currentPathNode);
-            closedList.Add(currentPathNode);
+            closeList.Add(currentPathNode);
 
             foreach (PathNode neighbourNode in GetNeighbourList(currentPathNode))
             {
@@ -66,7 +84,13 @@ public class PathFinding : MonoBehaviour
                     continue;
                 }
 
-                int tentativeGCost = currentPathNode.GetGCost() + CalculateDistance(currentPathNode.GetGridPosition, neighbourNode.GetGridPosition());
+                if (!neighbourNode.IsWalkable())
+                {
+                    closeList.Add(neighbourNode);
+                    continue;
+                }
+
+                int tentativeGCost = currentPathNode.GetGCost() + CalculateDistance(currentPathNode.GetGridPosition(), neighbourNode.GetGridPosition());
 
                 if (tentativeGCost < neighbourNode.GetGCost())
                 {
