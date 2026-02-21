@@ -122,14 +122,13 @@ public class ShootAction : BaseAction
             for (int z = -maxShootDistance; z <= maxShootDistance; z++)
             {
                 GridPosition offsetGridPosition = new GridPosition(x, z);
-                GridPosition unitGridPosition = unit.GetGridPosition();
-                GridPosition testGridPosition = unitGridPosition + offsetGridPosition;
+                GridPosition testGridPosition = gridPosition + offsetGridPosition;
                 if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
                 {
                     continue;
                 }
 
-                int testDistance = Math.Abs(x) + Math.Abs(z);
+                int testDistance = Mathf.Max(Math.Abs(x), Math.Abs(z));
                 if(testDistance > maxShootDistance)
                 {
                     continue;
@@ -148,7 +147,7 @@ public class ShootAction : BaseAction
                     continue;
                 }
 
-                Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(unitGridPosition);
+                Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
                 Vector3 shootDir = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
 
                 float unitShoulderHeight = 1.7f;
@@ -198,7 +197,7 @@ public class ShootAction : BaseAction
         return new EnemyAIAction
         {
             gridPosition = gridPosition,
-            actionValue = 100 + Mathf.RoundToInt(1 - targetUnit.GetHealthNormalized() * 100f),
+            actionValue = 100 + Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f),
         };
     }
 

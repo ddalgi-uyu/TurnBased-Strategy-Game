@@ -143,7 +143,7 @@ public class PathFinding : MonoBehaviour
         PathNode lowestFCostPathNode = pathNodeList[0];
         for (int i = 0; i < pathNodeList.Count; i++)
         {
-            if (pathNodeList[i].GetHCost() < lowestFCostPathNode.GetFCost())
+            if (pathNodeList[i].GetFCost() < lowestFCostPathNode.GetFCost())
             {
                 lowestFCostPathNode = pathNodeList[i];
             }
@@ -168,39 +168,28 @@ public class PathFinding : MonoBehaviour
             neighbourList.Add(GetNode(gridPosition.x - 1, gridPosition.z));
 
             if (gridPosition.z - 1 >= 0)
-            {
                 neighbourList.Add(GetNode(gridPosition.x - 1, gridPosition.z - 1));
-            }
 
             if (gridPosition.z + 1 < gridSystem.GetHeight())
-            {
                 neighbourList.Add(GetNode(gridPosition.x - 1, gridPosition.z + 1));
-            }
         }
 
         if (gridPosition.x + 1 < gridSystem.GetWidth())
         {
             neighbourList.Add(GetNode(gridPosition.x + 1, gridPosition.z));
 
-            if (gridPosition.z - 1 >= 0) {
+            if (gridPosition.z - 1 >= 0)
                 neighbourList.Add(GetNode(gridPosition.x + 1, gridPosition.z - 1));
-            }
 
             if (gridPosition.z + 1 < gridSystem.GetHeight())
-            {
                 neighbourList.Add(GetNode(gridPosition.x + 1, gridPosition.z + 1));
-            }
         }
 
         if (gridPosition.z - 1 >= 0)
-        {
             neighbourList.Add(GetNode(gridPosition.x, gridPosition.z - 1));
-        }
 
         if (gridPosition.z + 1 < gridSystem.GetHeight())
-        {
             neighbourList.Add(GetNode(gridPosition.x, gridPosition.z + 1));
-        }
 
         return neighbourList;
     }

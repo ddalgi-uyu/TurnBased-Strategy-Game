@@ -1295,7 +1295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186971734d270e2439e889883ba6073e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 4
+  maxDistance: 10
 --- !u!114 &8695881814420184925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1794,7 +1794,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1, y: -0.2}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3771482886138816638
 CanvasRenderer:
