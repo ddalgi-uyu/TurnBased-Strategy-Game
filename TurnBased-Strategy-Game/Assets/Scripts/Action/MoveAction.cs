@@ -10,20 +10,17 @@ public class MoveAction : BaseAction
     public event EventHandler OnStopMoving;
 
     [SerializeField] private int maxDistance = 1;
-    private Vector3 targetPosition;
+    private List<Vector3> positionList;
     private float stoppingDistance = .1f;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        targetPosition = transform.position;
-    }
+    private int currentPostionIndex;
 
     private void Update()
     {
         if (!isActive){
             return;
         }
+
+        Vector3 targetPosition = positionList[currentPostionIndex];
 
         // Move unit to target position with animation
         if (Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
@@ -36,15 +33,26 @@ public class MoveAction : BaseAction
         }
         else
         {
-            ActionComplete();
+            currentPostionIndex++;
+            if (currentPostionIndex >= positionList.Count)
+            {
+                OnStopMoving?.Invoke(this, EventArgs.Empty);
 
-            OnStopMoving?.Invoke(this, EventArgs.Empty);
+                ActionComplete();
+            }
         }
     }
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        List<GridPosition> pathGridPositionList = PathFinding.Instance.FindPath(unit.GetGridPosition(), gridPosition, out int pathLen);
+        currentPostionIndex = 0;
+        positionList = new List<Vector3>();
+
+        foreach (GridPosition pathGridPositionn in pathGridPositionList)
+        {
+            positionList.Add(LevelGrid.Instance.GetWorldPosition(pathGridPositionn));
+        }
 
         OnStartMoving?.Invoke(this, EventArgs.Empty);
 
@@ -76,6 +84,23 @@ public class MoveAction : BaseAction
 
                 if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
                 {
+                    continue;
+                }
+
+                if (!PathFinding.Instance.IsWalkableGridPosition(testGridPosition))
+                {
+                    continue;
+                }
+
+                if (!PathFinding.Instance.HasPath(unitGridPosition, testGridPosition))
+                {
+                    continue;
+                }
+
+                int pathFindingDistannceMultiplier = 10;
+                if(PathFinding.Instance.GetPathLength(unitGridPosition, testGridPosition) > maxDistance * pathFindingDistannceMultiplier)
+                {
+                    // path is too long
                     continue;
                 }
 

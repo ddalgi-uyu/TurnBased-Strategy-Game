@@ -24,6 +24,7 @@ public class UnitManager : MonoBehaviour
             Destroy(Instance);
             return;
         }
+        Instance = this;
 
         unitList = new List<Unit>();
         friendlyUnitList = new List<Unit>();
