@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\UI\ActionBusyUI.cs" />
     <Compile Include="Assets\Scripts\BulletProjectile.cs" />
     <Compile Include="Assets\Scripts\PathNode.cs" />
+    <Compile Include="Assets\Scripts\ScreenShakeActions.cs" />
     <Compile Include="Assets\Scripts\MouseWorld.cs" />
     <Compile Include="Assets\Scripts\LevelGrid.cs" />
     <Compile Include="Assets\Scripts\Action\SpinAction.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Assets\Scripts\LookAtCamera.cs" />
     <Compile Include="Assets\Scripts\EnemyAIAction.cs" />
     <Compile Include="Assets\Scripts\UI\UnitActionSystemUI.cs" />
+    <Compile Include="Assets\Scripts\SceneShake.cs" />
     <Compile Include="Assets\Scripts\Testing.cs" />
     <Compile Include="Assets\Scripts\CameraManager.cs" />
     <Compile Include="Assets\Scripts\PathFindingGridDebugObject.cs" />
